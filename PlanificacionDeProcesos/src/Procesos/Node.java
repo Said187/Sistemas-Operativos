@@ -6,9 +6,13 @@ class Node {
     int memory;
     int tLlegada;
     int tServicio;
-    //int priority;
+    int rafaga;
     int idProces;
     int tRestante;
+    int counter;
+    int ultVezCPU;
+    boolean responde;
+    int primVezCPU;
 
     Node next;
 
@@ -16,26 +20,78 @@ class Node {
         this.next = null;
     }
 
-    public Node(String name, int memory, int tLlegada, int tServicio, /*int priority,*/ int idProces) {
+    public Node(String name, int memory, int tLlegada, int tServicio, int rafaga, int idProces, boolean responde) {
         this.name = name;
         this.memory = memory;
         this.tLlegada = tLlegada;
         this.tServicio = tServicio;
-        //this.priority = priority;  
+        this.rafaga = rafaga;  
         this.idProces = idProces;
+        this.counter = 0;
+        this.ultVezCPU = 0;
+        this.responde = responde;
+        this.primVezCPU = 0;
         this.next = null;
     }
 
     public Node clone() {
-        return new Node(this.name, this.memory, this.tLlegada, this.tServicio, this.idProces);
+        return new Node(this.name, this.memory, this.tLlegada, this.tServicio, this.rafaga, this.idProces, this.responde);
     }
 
-    public int tamMem(){
+    public int getLlegada(){
+        return tLlegada;
+    }
+
+    public int getTServ(){
+        return tServicio;
+    }
+
+    public int getRafaga(){
+        return rafaga;
+    }
+
+    public void setRafaga(int i){
+        this.rafaga = i;
+    }
+
+    public int getMem(){
         return memory;
     }
 
-    public String nameProces(){
+    public String getName(){
         return name;
+    }
+
+    public void setCounter(int i){
+        this.counter = i;
+    }
+
+    public int getCounter(){
+        return counter; 
+    }
+
+    public void setUltVez(int i){
+        this.ultVezCPU = i;
+    }
+
+    public int getUltVez(){
+        return ultVezCPU;
+    }
+
+    void setResponde(boolean x){
+        this.responde = x;
+    }
+
+    public boolean getResponde(){
+        return responde;
+    }
+
+    public void setPrimVezCPU(int i){
+        this.primVezCPU = i;
+    }
+
+    public int getPrimVezCPU(){
+        return primVezCPU;
     }
 
     public void actTServicio(int Quantum){

@@ -6,6 +6,8 @@ import java.util.NoSuchElementException;
 public class Queue {
     private Node front, rear;
     private int size;
+    int ramTotal;
+    int con;
 
     public Queue() {
         this.front = this.rear = null;
@@ -13,11 +15,36 @@ public class Queue {
     }
 
     public void enqueue(Node newNode) {
+        
         if (this.rear == null) {
             this.front = this.rear = newNode;
         } else {
             this.rear.next = newNode;
             this.rear = newNode;
+        }
+        size++;
+    }
+
+    public void priorEnqueue(Node newNode) {
+        if (isEmpty()) {
+            front = rear = newNode;
+        } else if (newNode.tLlegada >= rear.tLlegada) {
+            rear.next = newNode;
+            rear = newNode;
+        } else { 
+            Node current = front;
+            Node previous = null;
+            while (current != null && newNode.tLlegada > current.tLlegada) {
+            previous = current;
+            current = current.next;
+            }
+        if (previous == null) { 
+            newNode.next = front;
+            front = newNode;
+        } else { // 
+            newNode.next = current;
+            previous.next = newNode;
+        }
         }
         size++;
     }
@@ -44,9 +71,8 @@ public class Queue {
 
     public void display() {
         Node current = front;
-        System.out.println("Procesos listos para ejecución");
         while (current != null) {
-            System.out.print("[" + current.name +/* ", "+ current.tServicio +*/"] " /*+ current.memory + ", Llegada: " + current.tLlegada + ", Servicio: " + current.tServicio + ", Prioridad: " + current.priority*/);
+            System.out.print("[" + current.name +"] ");
             current = current.next;
         }
         System.out.println("");
@@ -56,8 +82,24 @@ public class Queue {
         return this.front == null;
     }
 
-    public int size() {
+    public int getsize() {
         return size;
+    }
+
+    public int getramTotal(){
+        return ramTotal;
+    }
+
+    public void setramTotal(int ramTotal){
+        this.ramTotal = ramTotal;
+    }
+
+    public int getCon(){
+        return con;
+    }
+
+    public void setCon(int cont){
+        this.con = cont;
     }
 }
 
